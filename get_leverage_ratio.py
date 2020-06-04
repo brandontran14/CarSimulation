@@ -1,5 +1,5 @@
 
-# function LR=get_leverage_ratio(front_or_rear, FSAE_Race_Car)
+# def LR = get_leverage_ratio(front_or_rear, FSAE_Race_Car)
 
 # %This function takes in two inputs
 # %input 1: a string called front or rear.
@@ -8,10 +8,11 @@
 # %into that structure, but it must be a car structure otherwise
 # %the function will return an error.
 # %the function output returns the leverage ratio as a scalar!
+
 # if isstruct(FSAE_Race_Car) == 1
 #     if strcmp(front_or_rear,'front')
 #         if strcmp(FSAE_Race_Car.suspension_front.location,'inboard') ==1
-#             LR=(FSAE_Race_Car.suspension_front.travel/FSAE_Race_Car.wheel_front.travel)^2;
+#             LR=(FSAE_Race_Car.suspension_front.travel/FSAE_Race_Car.wheel_front.travel)^2; 
 #         else
 #             LR=cos(FSAE_Race_Car.suspension_front.angle*(pi/180));
 #         end
@@ -28,3 +29,18 @@
 # else
 #     error('you did not input a car file!')
 # end
+
+import math
+def get_LR(side, FSAE_Race_Car):
+    if(isinstance(FSAE_Race_Car, dict)):
+        if (side == "front"):
+            if(FSAE_Race_Car["suspension_front"]["location"] == "inboard"):
+                return (FSAE_Race_Car["suspension_front"]["travel"]/FSAE_Race_Car["wheel_front"]["travel"])**2
+            else:
+                return math.cos(FSAE_Race_Car["suspension_front"]["angle"]*(pi/180))
+        elif (side == "rear"):
+            if(FSAE_Race_Car["suspension_rear"]["location"] == "inboard"):
+                return (FSAE_Race_Car["suspension_rear"]["travel"]/FSAE_Race_Car["wheel_rear"]["travel"]) **2
+            else:
+                return math.cos(FSAE_Race_Car["supension_rear"]["angle"]*(pi/180))
+    raise ValueError("You didnt not input a car file or a side of the car")

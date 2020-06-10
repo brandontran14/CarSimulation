@@ -27,12 +27,12 @@ wheel_rear = wheel_rear_2014.wheel_rear
 
 
 
-chassis = {"team": "2014 Texas A&M", 
+Car = {"team": "2014 Texas A&M", 
             "year": 2014,
             "top_speed": 62, 
             "t2top_speed": 3.84, 
-            "pilot": driver_sally.pilot, 
-            "chasses": chassis,
+            "pilot": pilot, 
+            "chassis": chassis,
             "power_plant": power_plant,
             "suspension_front": suspension_front,
             "suspension_rear": suspension_rear,

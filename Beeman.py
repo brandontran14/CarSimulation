@@ -38,16 +38,15 @@ def Beeman(X0,V0,A0,M,C,K,FN,D):
     for i in range(2,D['N']):
         T[i+1] = T[i] + h
         FF, Dobj = FN(T[i+1],D)
-        print(A[i,:])
         X[i+1,:] = X0.conj().T + h*V0.conj().T + ((h**2/6) * (4*A[i,:] - A[i-1,:]))
         V[i+1,:] = V0.conj().T + (h/12) * (23* A[i,:] - 16*A[i-1,:] + 5 * A[i-2,:])
         A[i+1,:] = np.linalg.solve(M, (FF-C*V[i+1,:]-K*X[i+1,:]))[0]
-        for j in range(0,1):
+        for j in range(0,2):
             X[i+1,:] = X0.conj().T + h*V0.conj().T + ((h**2)/6) * (A[i+1,:]+2*A[i,:])
             V[i+1,:] = V0.conj().T + (h/2) * (A[i+1,:]+A[i,:])
             A[i+1,:] = np.linalg.solve(M, (FF-C*V[i+1,:] - K*X[i+1,:]))[0]
-        X0 = X[i+1,:]
-        V0 = V[i+1,:]
+        X0 = X[i+1,:].conj().T
+        V0 = V[i+1,:].conj().T
         A[i-2,:] = A[i-1,:]
         A[i-1,:] = A[i,:]
         A[i,:] = A[i+1,:]

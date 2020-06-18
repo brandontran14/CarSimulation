@@ -1,3 +1,6 @@
+#this function gets the dynamic trajectory of a Car
+#inputs are time, position, height, time in, time out, velocity in, velocity out, and Car struct
+#outputs are time, Velocity, and position
 import math
 def trajectory(t,X,h,t_in,t_out,V_in,V_out,Car):
     V_top = Car["top_speed"]
